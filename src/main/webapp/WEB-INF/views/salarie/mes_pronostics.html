@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+
+<title>Mes Pronostics</title>
+
+<link href="../../resources/css/bootstrap.min.css" rel="stylesheet"
+	th:href="@{/resources/css/bootstrap.min.css}" type="text/css" />
+<link href="../../resources/css/style.css" rel="stylesheet"
+	th:href="@{/resources/css/style.css}" type="text/css" />
+	
+</head>
+<body>
+
+	<div th:replace="fragments/navbar :: navbar"></div>
+
+	<!-- Page Content -->
+	<div class="container">
+
+		<!-- Page Heading -->
+		<div class="row">
+			<div class="col-lg-12">
+				<h1 class="page-header">Mes Pronostics</h1>
+			</div>
+		</div>
+		<!-- /.row -->
+
+		<div th:each="competition : ${competitions}" >
+			<div class="panel panel-primary">
+				<div class="panel-heading"><span th:text="${competition.nom}"></span></div>
+				<div class="panel-body">
+					<div class="row">
+
+						<div   th:each="poule : ${poules}">
+
+							<div class="col-md-offset-2 col-md-8">
+
+								<div class="panel panel-success">
+									<div class="panel-heading" style="text-align: center;">
+										groupe <span th:text="${poule.nom}"></span></div>
+									<div class="panel-body">
+
+										<div th:each="pronostic : ${pronostics}">
+											<div th:if="${pronostic.rencontre.poule.id==poule.id }">
+												<div class="row">
+													<div class="col-md-offset-1">
+														<div class="col-md-4">
+								<img src="#" style="width: 40px; height: 30px;"
+						th:src="@{'/resources/img/'+${pronostic.rencontre.pays1.logo}+'.png'}">&nbsp;&nbsp;
+															<span th:text="${pronostic.rencontre.pays1.nom}"></span>
+														</div>
+														<div class="col-md-1"><span th:text="${pronostic.but1}"></span></div>
+														<div class="col-md-1">
+				
+	<img style="width: 30px; height: 30px;" 	th:src="@{'/resources/img/vs.png'}"></div>
+														<div class="col-md-1" style="text-align: right;"><span th:text="${pronostic.but2}"></span></div>
+														<div class="col-md-4" style="text-align: right;"><span th:text="${pronostic.rencontre.pays2.nom}"></span>&nbsp;&nbsp;
+															<img  src="#" style="width: 40px; height: 30px;"
+						th:src="@{'/resources/img/'+${pronostic.rencontre.pays2.logo}+'.png'}">
+														</div>
+													</div>
+												</div>
+												<br>
+											</div>
+
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+
+		<!-- Footer -->
+		<div th:replace="fragments/footer :: footer"></div>
+
+	</div>
+	<!-- /.container -->
+
+<script type="text/javascript" src="../../resources/js/jquery.js"
+		th:src="@{/resources/js/jquery.js}"></script>
+
+	<script type="text/javascript"
+		src="../../resources/js/bootstrap.min.js"
+		th:src="@{/resources/js/bootstrap.min.js}"></script>
+
+</body>
+
+</html>

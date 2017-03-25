@@ -1,0 +1,33 @@
+
+<!DOCTYPE html>
+<html  xmlns:th="http://www.thymeleaf.org">
+<head>
+
+    <meta charset="utf-8" />
+    <title>Error</title>
+<style th:inline="text">
+.main{
+  margin:0;
+  padding:0;
+  background: linear-gradient(rgba(255,255,255,0.5),rgba(255,255,255,0.5)), url([[@{/resources/img/404.png}]])  no-repeat  center fixed;
+  margin-top:15%;
+ }
+ </style>
+ 
+ <link href="../../resources/css/error_page_style.css" rel="stylesheet"
+	th:href="@{/resources/css/error_page_style.css}" type="text/css" />
+	
+<link href='//fonts.googleapis.com/css?family=Viga' rel='stylesheet' type='text/css'>
+</head>
+
+
+<body class="main">
+		
+		<h1>404</h1>
+		<h2>Ooops, Quelque chose ne va pas</h2>
+		<div class="more_w3ls">
+			<a th:href="@{/}" href="#">Go Home :)</a>
+		</div>
+		
+</body>
+</html>

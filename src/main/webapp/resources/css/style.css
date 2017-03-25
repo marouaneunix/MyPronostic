@@ -1,0 +1,127 @@
+@import url(https://fonts.googleapis.com/css?family=Roboto:300);
+
+body {
+	padding-top: 70px;
+	font-family: "Roboto", sans-serif;
+	/* Required padding for .navbar-fixed-top. Remove if using .navbar-static-top. Change if height of navigation changes. */
+}
+
+footer {
+	margin: 50px 0;
+}
+
+body {
+	padding-top: 40px;
+	padding-bottom: 40px;
+	background-color: #fff;
+}
+
+/*signin*/
+.form-signin {
+	max-width: 330px;
+	padding: 15px;
+	margin: 0 auto;
+}
+
+.form-signin .form-signin-heading, .form-signin .checkbox {
+	margin-bottom: 10px;
+}
+
+.form-signin .checkbox {
+	font-weight: normal;
+}
+
+.form-signin .form-control {
+	position: relative;
+	height: auto;
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+	padding: 10px;
+	font-size: 16px;
+}
+
+.form-signin .form-control:focus {
+	z-index: 2;
+}
+
+.form-signin input[type="email"] {
+	margin-bottom: -1px;
+	border-bottom-right-radius: 0;
+	border-bottom-left-radius: 0;
+}
+
+.form-signin input[type="password"] {
+	margin-bottom: 10px;
+	border-top-left-radius: 0;
+	border-top-right-radius: 0;
+}
+
+.inp_pronostic {
+	font-family: inherit;
+	font-size: inherit;
+	line-height: inherit;
+	width: 30px;
+}
+
+.logout {
+	text-decoration: none;
+	display: block;
+	padding: 3px 20px;
+	clear: both;
+	font-weight: 400;
+	line-height: 1.42857143;
+	color: #333;
+	white-space: nowrap;
+}
+
+.logout:hover {
+	text-decoration: none;
+	display: block;
+	padding: 3px 20px;
+	clear: both;
+	font-weight: 400;
+	line-height: 1.42857143;
+	color: #333;
+	white-space: nowrap;
+	text-decoration: none;
+}
+
+/* Nav bar css */
+.navbar-green {
+	background-color: #337ab7;
+	border-color: #337ab7;
+}
+
+.navbar-inverse .navbar-brand {
+	color: #fff;
+	font-family: "Roboto", sans-serif;
+	font-size: 25px;
+	font-weight: bold;
+}
+
+.navbar-inverse .navbar-nav>li>a {
+	color: #fff;
+	font-family: "Roboto", sans-serif;
+	font-size: initial;
+}
+
+.navbar-inverse .navbar-nav>.open>a, .navbar-inverse .navbar-nav>.open>a:focus,
+	.navbar-inverse .navbar-nav>.open>a:hover {
+	color: #bab4b4;
+	background-color: #337ab7;
+}
+
+.navbar-inverse .navbar-nav>li>a:focus, .navbar-inverse .navbar-nav>li>a:hover
+	{
+	color: #b9b9b9;
+	background-color: transparent;
+}
+
+.bodyError {
+	margin: 0;
+	padding: 0;
+	background: url(../img/404.png) no-repeat center fixed;
+	background-size: cover;
+	">
+}

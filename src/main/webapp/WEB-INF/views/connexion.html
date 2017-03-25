@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+
+<meta charset="utf-8" />
+<title>Connexion</title>
+
+
+<link href="../../resources/css/bootstrap.min.css" rel="stylesheet"
+	th:href="@{/resources/css/bootstrap.min.css}" type="text/css" />
+<link href="../../resources/css/connexionStyle.css" rel="stylesheet"
+	th:href="@{/resources/css/connexionStyle.css}" type="text/css" />
+
+<meta name="_csrf" th:content="${_csrf.token}" />
+<meta name="_csrf_header" th:content="${_csrf.headerName}" />
+
+</head>
+
+<body>
+
+	<div class="login-page">
+		<div class="form">
+			<form class="login-form" action="#" th:action="@{/login}"
+				method="POST">
+				<input type="text" placeholder="name" id="username" name="username" />
+				<input type="password" placeholder="password" id="password"
+					name="password" />
+					
+				<button type="submit">login</button>
+				<span class="span_error" th:if="${(param.error != null)}" th:text="#{authentication.error}">error d'authentification</span>
+			</form>
+		</div>
+	</div>
+
+</body>
+</html>

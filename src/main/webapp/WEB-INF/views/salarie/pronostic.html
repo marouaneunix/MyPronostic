@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+
+<title>Competition</title>
+
+<link href="../../resources/css/bootstrap.min.css" rel="stylesheet"
+	th:href="@{/resources/css/bootstrap.min.css}" type="text/css" />
+<link href="../../resources/css/style.css" rel="stylesheet"
+	th:href="@{/resources/css/style.css}" type="text/css" />
+<meta name="_csrf" th:content="${_csrf.token}" />
+<meta name="_csrf_header" th:content="${_csrf.headerName}" />
+</head>
+
+
+<body>
+
+
+
+	<div th:replace="fragments/navbar :: navbar"></div>
+
+	<br />
+	<br />
+	<br />
+	<div class="container">
+
+		<!-- Page Heading -->
+		<div class="row">
+			<div class="col-md-12">
+				<h1 class="page-header">
+					Poule <span th:text="${poule.nom}"></span>
+				</h1>
+			</div>
+		</div>
+		<!-- /.row -->
+
+		<div th:if="${rencontres.empty}">Rien a pronostiquer dans cette
+			poule</div>
+
+		<div th:each="rencontre : ${rencontres}">
+			<form method="post" action="#" th:action="@{/pronostiquez}">
+				<div class="row">
+					<div class="col-md-11">
+						<p style="text-align: center; font-weight: bold;"
+							th:text="${#temporals.format(rencontre.dateRencontre, 'dd-MM-yyyy HH:MM')}"></p>
+					</div>
+					<div class="col-md-1"></div>
+				</div>
+				<div class="row">
+					<div class="">
+						<div class="col-md-3">
+							<img src="#" style="width: 40px; height: 30px;"
+								th:src="@{'/resources/img/'+${rencontre.pays1.logo}+'.png'}">
+							<span th:text="${rencontre.pays1.nom}"></span>
+						</div>
+						<div class="col-md-2">
+							<input type="hidden" th:value="${rencontre.id}" name="rencontre" />
+							<input type="text" class="inp_pronostic" name="but_1" />
+						</div>
+						<div class="col-md-2">
+							<img style="width: 30px; height: 30px;"
+								th:src="@{'/resources/img/vs.png'}">
+						</div>
+						<div class="col-md-2">
+							<input type="text" class="inp_pronostic" name="but_2" />
+						</div>
+						<div class="col-md-2" style="text-align: right;">
+							<span th:text="${rencontre.pays2.nom}"></span>&nbsp;&nbsp; <img
+								src="#" style="width: 40px; height: 30px;"
+								th:src="@{'/resources/img/'+${rencontre.pays2.logo}+'.png'}">
+						</div>
+						<div class="col-md-1">
+							<button type="submit" class="btn btn-primary">Pronostiquer</button>
+						</div>
+					</div>
+				</div>
+			</form>
+			<hr />
+		</div>
+
+		<!-- Footer -->
+		<div th:replace="fragments/footer :: footer"></div>
+	</div>
+
+	<script type="text/javascript" src="../../resources/js/jquery.js"
+		th:src="@{/resources/js/jquery.js}"></script>
+
+	<script type="text/javascript"
+		src="../../resources/js/bootstrap.min.js"
+		th:src="@{/resources/js/bootstrap.min.js}"></script>
+
+</body>
+
+</html>

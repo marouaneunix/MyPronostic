@@ -1,0 +1,113 @@
+
+
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+
+<title>Poule</title>
+<link href="../../resources/css/heroic-features.css" rel="stylesheet"
+	th:href="@{/resources/css/heroic-features.css}" type="text/css" />
+<link href="../../resources/css/bootstrap.min.css" rel="stylesheet"
+	th:href="@{/resources/css/bootstrap.min.css}" type="text/css" />
+<link href="../../resources/css/style.css" rel="stylesheet"
+	th:href="@{/resources/css/style.css}" type="text/css" />
+</head>
+<body>
+
+
+
+	<!-- Navigation -->
+
+	<div th:replace="fragments/navbar :: navbar"></div>
+
+	<!-- Page Content -->
+	<div class="container">
+
+		<!-- Jumbotron Header -->
+		<header class="">
+			<div class="alert alert-default" role="alert">
+				<h2 style="float: left;">
+					<span th:text="${competition.nom}"></span>, Welcome !
+				</h2>
+				<a class="btn btn-primary btn-lg" href="#" role="button"
+					style="float: right;"><span th:text="${competition.annee}"></span></a>
+			</div>
+
+
+		</header>
+
+		<hr>
+
+		<!-- Title -->
+		<div class="row">
+			<div class="col-lg-12">
+				<div class="alert alert-info" role="alert">
+					<h4>Les poules :</h4>
+				</div>
+			</div>
+		</div>
+		<!-- /.row -->
+
+		<!-- Page Features -->
+		<div class="row text-center">
+
+
+
+			<div th:each="poule_pays : ${map_poule_pays}">
+
+
+				<div class="col-md-3 col-sm-6 hero-feature">
+					<div class="thumbnail">
+						<div class="caption">
+							<div class="panel panel-primary">
+								<div class="panel-heading">
+									<span th:text="${poule_pays.key.nom}"></span>
+								</div>
+								<div class="panel-body">
+									<table style="width: 100%">
+
+										<tr th:each="pays : ${poule_pays.value}" class="danger"
+											style="height: 50px;">
+											<td><img src="#" style="width: 40px; height: 30px;"
+												th:src="@{'/resources/img/'+${pays.logo}+'.png'}"></td>
+											<td><span th:text="${pays.nom }"></span></td>
+										</tr>
+
+										<tr>
+											<td colspan="2"></td>
+										</tr>
+									</table>
+								</div>
+								<div class="panel-footer">
+									<a class="btn btn-primary"
+										th:href="@{'/pronostiquez/'+${poule_pays.key.id}}">Pronostiquez
+									</a>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+
+			</div>
+
+
+
+		</div>
+		<!-- /.row -->
+
+		<hr>
+
+		<!-- Footer -->
+		<div th:replace="fragments/footer :: footer"></div>
+
+	</div>
+	<!-- /.container -->
+
+	<script type="text/javascript" src="../../resources/js/jquery.js"
+		th:src="@{/resources/js/jquery.js}"></script>
+
+	<script type="text/javascript"
+		src="../../resources/js/bootstrap.min.js"
+		th:src="@{/resources/js/bootstrap.min.js}"></script>
+</body>
+</html>

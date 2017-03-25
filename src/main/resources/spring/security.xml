@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans:beans xmlns="http://www.springframework.org/schema/security"
+	xmlns:beans="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+		http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+		http://www.springframework.org/schema/security
+		http://www.springframework.org/schema/security/spring-security.xsd">
+
+
+
+
+	<!-- desable security on resources folder -->
+	<http pattern="/resources/**" security="none" />
+
+
+
+	<http auto-config="true">
+		<intercept-url pattern="/"
+			access="hasRole('USER') or hasRole('ADMIN') " />
+		<intercept-url pattern="/home"
+			access="hasRole('USER') or hasRole('ADMIN') " />
+		<form-login login-page="/connexion" username-parameter="username"
+			password-parameter="password" default-target-url="/competition"
+			always-use-default-target="true" />
+		<!-- CSRF is enabled so you should send /logout in POST action -->
+		<logout delete-cookies="JSESSIONID" logout-url="/logout" />
+	</http>
+	<!-- Adding a Password Encoder -->
+	<beans:bean name="bcryptEncoder"
+		class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder" />
+
+	<!-- User authentication method " " -->
+	<authentication-manager>
+		<authentication-provider user-service-ref="userServiceImpl">
+			<password-encoder ref="bcryptEncoder" />
+		</authentication-provider>
+	</authentication-manager>
+
+	<beans:bean id="userServiceImpl"
+		class="fr.norsys.pronostic.service.salarie.impl.AuthenticationServiceImpl">
+	</beans:bean>
+
+</beans:beans>
+
+
