@@ -1,6 +1,7 @@
 package fr.norsys.pronostic.dao.competition;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.stereotype.Repository;
 
@@ -12,5 +13,6 @@ import fr.norsys.pronostic.exception.DaoException;
 public interface CompetitionDao extends IDAO<Competition> {
 
 	List<Competition> getAll() throws DaoException;
+
 
 }

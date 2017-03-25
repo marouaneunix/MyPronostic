@@ -19,7 +19,7 @@ public class GetCompetitonByIdTest extends ACompetitonDaoTest {
 	}
 
 	@Test(expected = DaoException.class)
-	public void shouldThrowTechnocalExceptionWhenGetById() throws DaoException {
+	public void shouldThrowDaoExceptionWhenGetById() throws DaoException {
 		this.competitionDao.getById(500L);
 	}
 

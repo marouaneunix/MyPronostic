@@ -10,9 +10,14 @@ import java.util.Optional;
 
 import javax.sql.DataSource;
 
+import fr.norsys.pronostic.dao.JdbcConfig;
+import fr.norsys.pronostic.mappers.pays.PaysMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.EmptyResultDataAccessException;
+import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.security.access.method.P;
 import org.springframework.stereotype.Repository;
 
 import fr.norsys.pronostic.dao.pays.PaysDao;
@@ -21,15 +26,14 @@ import fr.norsys.pronostic.exception.DaoException;
 import fr.norsys.pronostic.utils.DaoUtils;
 
 @Repository
-public class PaysDaoImpl implements PaysDao {
+public class PaysDaoImpl extends JdbcConfig implements PaysDao {
 
 	private static final Logger LOGGER = LoggerFactory.getLogger(PaysDaoImpl.class);
 
 	private static final String SELECT_QUERY = " SELECT ID_PAYS,NOM,LOGO FROM PAYS WHERE ID_PAYS = ?";
 	private static final String SELECT_PAYS_FROM_POULE = " SELECT  pa.ID_PAYS , pa.NOM  , pa.LOGO from PAYS pa 	 INNER JOIN POULE_PAYS pp on pp.ID_PAYS = pa.ID_PAYS  INNER JOIN POULE po on po.ID_POULE = pp.ID_POULE  WHERE po.ID_POULE = ? ";
 
-	@Autowired
-	private DataSource dataSource;
+
 
 	@Override
 	public int create(Pays model) throws DaoException {
@@ -43,29 +47,11 @@ public class PaysDaoImpl implements PaysDao {
 
 	@Override
 	public Optional<Pays> getById(Long id) throws DaoException {
-
-		PreparedStatement preparedStatement;
-		ResultSet rs;
-		Pays pays;
-		Connection connection = null;
-
-		try {
-			connection = this.dataSource.getConnection();
-			preparedStatement = DaoUtils.initialisationRequetePreparee(connection, SELECT_QUERY, false, id);
-			rs = preparedStatement.executeQuery();
-			rs.next();
-			pays = new Pays(rs.getLong("ID_PAYS"), rs.getString("NOM"), rs.getString("LOGO"));
-
-		} catch (SQLException e) {
-			throw new DaoException("getByID Not working SQLException", e);
-		} finally {
-			try {
-				if (connection != null) {
-					connection.close();
-				}
-			} catch (SQLException e) {
-				LOGGER.error("ERROR : {}", e.getMessage());
-			}
+		Pays pays = null;
+		try{
+			pays = this.jdbcTemplate.queryForObject(SELECT_QUERY,new Object[]{id},new PaysMapper());
+		}catch (EmptyResultDataAccessException e){
+			throw  new DaoException("getById Pays exception",e);
 		}
 		return Optional.ofNullable(pays);
 	}
@@ -77,33 +63,6 @@ public class PaysDaoImpl implements PaysDao {
 
 	@Override
 	public List<Pays> getPaysByPoule(Long id) throws DaoException {
-		PreparedStatement preparedStatement;
-		ResultSet rs;
-		List<Pays> pays = new ArrayList<>();
-		Connection connection = null;
-
-		try {
-			connection = this.dataSource.getConnection();
-			preparedStatement = DaoUtils.initialisationRequetePreparee(connection, SELECT_PAYS_FROM_POULE, false, id);
-			rs = preparedStatement.executeQuery();
-
-			while (rs.next()) {
-
-				pays.add(new Pays(rs.getLong("ID_PAYS"), rs.getString("NOM"), rs.getString("LOGO")));
-			}
-
-		} catch (Exception e) {
-			throw new DaoException("getAllPaysByPoule Not working SQLException", e);
-		} finally {
-			try {
-				if (connection != null) {
-					connection.close();
-				}
-			} catch (SQLException e) {
-				LOGGER.error("ERROR : {}", e.getMessage());
-			}
-		}
-
-		return pays;
+		return this.jdbcTemplate.query(SELECT_QUERY,new Object[]{id},new PaysMapper());
 	}
 }

@@ -18,4 +18,13 @@ public class GetPaysByPouleTest extends APaysDaoTest {
 		assertThat(payss).isNotNull();
 		assertThat(payss).isNotEmpty();
 	}
+
+	@Test
+	public void shouldReturnEmptyPays() throws DaoException {
+
+		List<Pays> payss = this.paysDao.getPaysByPoule(500L);
+		assertThat(payss).isEmpty();
+	}
+
+
 }
