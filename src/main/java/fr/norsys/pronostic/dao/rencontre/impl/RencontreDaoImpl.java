@@ -44,11 +44,11 @@ public class RencontreDaoImpl extends JdbcConfig implements RencontreDao {
 			"po.ID_POULE, po.NOM as POULE_NOM, po.GROUPE, " +
 			"co.ID_COMPETITION, co.NOM COMPETITION_NOM, co.ANNEE " +
 			"from RENCONTRE re " +
-			"left JOIN (select ID_PRONOSTIC,ID_RENCONTRE from PRONOSTIC pro  inner join SALARIE sal on pro.ID_SALARIE = sal.ID_SALARIE where sal.ID_SALARIE = ? ) pr ON re.ID_RENCONTRE = pr.ID_RENCONTRE\n" +
-			"LEFT JOIN PAYS pay1 on pay1.ID_PAYS = re.ID_PAYS_1" +
-			"LEFT JOIN PAYS pay2 on pay2.ID_PAYS = re.ID_PAYS_2" +
-			"LEFT JOIN POULE po on po.ID_POULE = re.ID_POULE" +
-			"LEFT JOIN COMPETITION co on co.ID_COMPETITION = po.ID_COMPETITION" +
+			"left JOIN (select ID_PRONOSTIC,ID_RENCONTRE from PRONOSTIC pro  inner join SALARIE sal on pro.ID_SALARIE = sal.ID_SALARIE where sal.ID_SALARIE = ? ) pr ON re.ID_RENCONTRE = pr.ID_RENCONTRE " +
+			"LEFT JOIN PAYS pay1 on pay1.ID_PAYS = re.ID_PAYS_1 " +
+			"LEFT JOIN PAYS pay2 on pay2.ID_PAYS = re.ID_PAYS_2 " +
+			"LEFT JOIN POULE po on po.ID_POULE = re.ID_POULE " +
+			"LEFT JOIN COMPETITION co on co.ID_COMPETITION = po.ID_COMPETITION " +
 			"WHERE  pr.ID_PRONOSTIC IS NULL and re.DATE and re.ID_POULE = ? and  TIMESTAMPDIFF(MINUTE,now(),re.DATE) >= 15";
 
 
