@@ -10,7 +10,7 @@ public class Salarie {
 	private String username;
 	private String password;
 	private Role role;
-	private List<Pronostic> pronostics;
+
 
 	public Salarie() {
 	}
@@ -22,7 +22,7 @@ public class Salarie {
 		this.username = salarie.getUsername();
 		this.password = salarie.getPassword();
 		this.role = salarie.getRole();
-		this.pronostics = salarie.getPronostics();
+
 	}
 
 	public Salarie(Long id) {
@@ -30,24 +30,23 @@ public class Salarie {
 		this.id = id;
 	}
 
-	public Salarie(Long id, String nom, String prenom, String username, String password, Role role,
-			List<Pronostic> pronostics) {
+	public Salarie(Long id, String nom, String prenom, String username, String password, Role role) {
 		this.id = id;
 		this.nom = nom;
 		this.prenom = prenom;
 		this.username = username;
 		this.password = password;
 		this.role = role;
-		this.pronostics = pronostics;
+
 	}
 
-	public Salarie(String nom, String prenom, String username, String password, Role role, List<Pronostic> pronostics) {
+	public Salarie(String nom, String prenom, String username, String password, Role role) {
 		this.nom = nom;
 		this.prenom = prenom;
 		this.username = username;
 		this.password = password;
 		this.role = role;
-		this.pronostics = pronostics;
+
 	}
 
 	public Long getId() {
@@ -92,13 +91,5 @@ public class Salarie {
 
 	public void setRole(Role role) {
 		this.role = role;
-	}
-
-	public List<Pronostic> getPronostics() {
-		return this.pronostics;
-	}
-
-	public void setPronostics(List<Pronostic> pronostics) {
-		this.pronostics = pronostics;
 	}
 }
