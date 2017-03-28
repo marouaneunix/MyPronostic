@@ -29,12 +29,9 @@ public class RencontreServiceImpl implements RencontreService {
 
 	@Override
 	public List<Rencontre> getAll() throws DataServiceException {
-		try {
-			return this.rencontreDao.getAll();
-		} catch (DaoException e) {
 
-			throw new DataServiceException("Error get all rencontres Service", e);
-		}
+			return this.rencontreDao.getAll();
+
 	}
 
 	@Override
@@ -48,20 +45,16 @@ public class RencontreServiceImpl implements RencontreService {
 
 	@Override
 	public List<Rencontre> getRencontresByIdPoule(Long id) throws DataServiceException {
-		try {
+
 			return this.rencontreDao.getAllByIdPoule(id);
-		} catch (DaoException e) {
-			throw new DataServiceException("Error get rencontres by poule Service", e);
-		}
+
 	}
 
 	@Override
 	public List<Rencontre> getRencontresNonPronostiquerByIdPoule(Long idSalarie, Long idPoule)
 			throws DataServiceException {
-		try {
+
 			return this.rencontreDao.getAllRencontresNonPronostiquerParPouleID(idSalarie, idPoule);
-		} catch (DaoException e) {
-			throw new DataServiceException("Error get all rencontres non pronostiquez Service", e);
-		}
+
 	}
 }

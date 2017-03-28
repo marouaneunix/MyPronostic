@@ -10,9 +10,13 @@ import java.util.Optional;
 
 import javax.sql.DataSource;
 
+import fr.norsys.pronostic.dao.JdbcConfig;
+import fr.norsys.pronostic.domain.Competition;
+import fr.norsys.pronostic.mappers.poule.PouleMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Repository;
 
 import fr.norsys.pronostic.dao.competition.CompetitionDao;
@@ -22,18 +26,22 @@ import fr.norsys.pronostic.exception.DaoException;
 import fr.norsys.pronostic.utils.DaoUtils;
 
 @Repository
-public class PouleDaoImpl implements PouleDao {
+public class PouleDaoImpl extends JdbcConfig implements PouleDao {
 
 	private static final Logger LOGGER = LoggerFactory.getLogger(PouleDaoImpl.class);
 
-	private static final String SELECT_ALL_BY_COMPETITON = "SELECT * FROM POULE WHERE ID_COMPETITION = ?";
-	private static final String SELECT_BY_ID = "SELECT * FROM POULE WHERE ID_POULE = ?";
+	private static final String SELECT_ALL_BY_COMPETITON = "SELECT po.ID_POULE,po.NOM NOM_POULE,po.GROUPE, co.ID_COMPETITION, co.NOM, co.ANNEE FROM POULE po\n" +
+														   "left join COMPETITION co on co.ID_COMPETITION = po.ID_COMPETITION\n" +
+															"where co.ID_COMPETITION = ?;";
+	private static final String SELECT_BY_ID = "SELECT po.ID_POULE,po.NOM NOM_POULE,po.GROUPE, co.ID_COMPETITION, co.NOM, co.ANNEE FROM POULE po\n" +
+			 								   "left join COMPETITION co on co.ID_COMPETITION = po.ID_COMPETITION\n" +
+											   "where po.ID_POULE = ?";
+
+
 
 	@Autowired
 	private CompetitionDao competitionDao;
 
-	@Autowired
-	private DataSource dataSource;
 
 	@Override
 	public int create(Poule model) throws DaoException {
@@ -47,34 +55,16 @@ public class PouleDaoImpl implements PouleDao {
 
 	@Override
 	public Optional<Poule> getById(Long id) throws DaoException {
-		PreparedStatement preparedStatement;
-		ResultSet rs;
-		Poule poule;
-		Connection connection = null;
-
-		try {
-			connection = this.dataSource.getConnection();
-			preparedStatement = DaoUtils.initialisationRequetePreparee(connection, SELECT_BY_ID, false, id);
-			rs = preparedStatement.executeQuery();
-
-			rs.next();
-			poule = new Poule(rs.getLong("ID_POULE"), rs.getString("NOM"), rs.getBoolean("GROUPE"),
-					this.competitionDao.getById(rs.getLong("ID_COMPETITION")).get());
-
-		} catch (Exception e) {
-			throw new DaoException("getID  Not working SQLException", e);
-		} finally {
-			try {
-				if (connection != null) {
-					connection.close();
-				}
-			} catch (SQLException e) {
-				LOGGER.error("ERROR : {}", e.getMessage());
-			}
+		Poule poule = null;
+		try{
+			poule = this.jdbcTemplate.queryForObject(SELECT_BY_ID, new Object[]{id}, new PouleMapper());
+		}catch (EmptyResultDataAccessException e){
+			throw new DaoException("no poule found ",e);
 		}
-
 		return Optional.ofNullable(poule);
 	}
+
+
 
 	@Override
 	public void delete(Poule model) throws DaoException {
@@ -82,35 +72,7 @@ public class PouleDaoImpl implements PouleDao {
 	}
 
 	@Override
-	public List<Poule> getAllPoulesByCompetitionId(Long id) throws DaoException {
-
-		PreparedStatement preparedStatement;
-		ResultSet rs;
-		Connection connection = null;
-
-		List<Poule> poules = new ArrayList<>();
-		try {
-			connection = this.dataSource.getConnection();
-			preparedStatement = DaoUtils.initialisationRequetePreparee(connection, SELECT_ALL_BY_COMPETITON, false, id);
-			rs = preparedStatement.executeQuery();
-
-			while (rs.next()) {
-				poules.add(new Poule(rs.getLong("ID_POULE"), rs.getString("NOM"), rs.getBoolean("GROUPE"),
-						this.competitionDao.getById(rs.getLong("ID_COMPETITION")).get()));
-			}
-
-		} catch (Exception e) {
-			throw new DaoException("getAll Not working SQLException", e);
-		} finally {
-			try {
-				if (connection != null) {
-					connection.close();
-				}
-			} catch (SQLException e) {
-				LOGGER.error("ERROR : {}", e.getMessage());
-			}
-		}
-
-		return poules;
+	public List<Poule> getAllPoulesByCompetitionId(Long id) {
+		return this.jdbcTemplate.query(SELECT_ALL_BY_COMPETITON, new Object[]{id}, new PouleMapper());
 	}
 }

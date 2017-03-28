@@ -16,4 +16,5 @@ public class GetAllRencontresTest extends ARencontreTest {
 		List<Rencontre> rencontres = this.rencontreDao.getAll();
 		assertThat(rencontres.stream().count()).isGreaterThan(1);
 	}
+
 }

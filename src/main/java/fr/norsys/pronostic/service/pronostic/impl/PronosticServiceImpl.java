@@ -38,11 +38,8 @@ public class PronosticServiceImpl implements PronosticService {
 
 	@Override
 	public List<Pronostic> getAllBySalarieId(Long id) throws DataServiceException {
-		try {
+
 			return this.pronosticDao.getAllPronosticsBySalarieId(id);
-		} catch (DaoException e) {
-			// TODO: insert message
-			throw new DataServiceException("", e);
-		}
+
 	}
 }

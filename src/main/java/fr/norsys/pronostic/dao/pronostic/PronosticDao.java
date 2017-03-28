@@ -11,6 +11,6 @@ import fr.norsys.pronostic.exception.DaoException;
 @Repository
 public interface PronosticDao extends IDAO<Pronostic> {
 
-	List<Pronostic> getAllPronosticsBySalarieId(Long id) throws DaoException;
+	List<Pronostic> getAllPronosticsBySalarieId(Long id);
 
 }

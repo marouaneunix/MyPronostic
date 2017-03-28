@@ -11,5 +11,5 @@ import fr.norsys.pronostic.exception.DaoException;
 @Repository
 public interface PouleDao extends IDAO<Poule> {
 
-	List<Poule> getAllPoulesByCompetitionId(Long id) throws DaoException;
+	List<Poule> getAllPoulesByCompetitionId(Long id);
 }

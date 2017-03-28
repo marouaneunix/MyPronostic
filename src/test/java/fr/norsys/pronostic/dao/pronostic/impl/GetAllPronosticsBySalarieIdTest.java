@@ -15,4 +15,10 @@ public class GetAllPronosticsBySalarieIdTest extends APronosticTest {
 		List<Pronostic> pronostics = this.pronosticDao.getAllPronosticsBySalarieId(3L);
 		assertThat(pronostics.stream().count()).isGreaterThan(2);
 	}
+
+	@Test
+	public void shoudlBeEmpty(){
+		List<Pronostic> pronostics = this.pronosticDao.getAllPronosticsBySalarieId(500L);
+		assertThat(pronostics).isEmpty();
+	}
 }

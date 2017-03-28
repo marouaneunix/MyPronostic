@@ -17,4 +17,10 @@ public class GetAllPoulesByIdCompetitionTest extends APouleTest {
 		assertThat(poules.stream().count()).isEqualTo(4);
 	}
 
+	@Test()
+	public void shouldBeEmpty() throws DaoException{
+		List<Poule> poules = this.pouleDao.getAllPoulesByCompetitionId(500L);
+		assertThat(poules.isEmpty()).isTrue();
+	}
+
 }

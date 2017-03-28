@@ -11,10 +11,10 @@ import fr.norsys.pronostic.exception.DaoException;
 @Repository
 public interface RencontreDao extends IDAO<Rencontre> {
 
-	List<Rencontre> getAll() throws DaoException;
+	List<Rencontre> getAll() ;
 
-	List<Rencontre> getAllByIdPoule(long id) throws DaoException;
+	List<Rencontre> getAllByIdPoule(long id)  ;
 
-	List<Rencontre> getAllRencontresNonPronostiquerParPouleID(long idSalarie, long idPoule) throws DaoException;
+	List<Rencontre> getAllRencontresNonPronostiquerParPouleID(long idSalarie, long idPoule) ;
 
 }

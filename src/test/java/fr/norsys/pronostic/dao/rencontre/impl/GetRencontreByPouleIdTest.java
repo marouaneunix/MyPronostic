@@ -17,4 +17,9 @@ public class GetRencontreByPouleIdTest extends ARencontreTest {
 		assertThat(rencontres.size()).isGreaterThan(1);
 
 	}
+
+	@Test
+	public void shouldReturnEmptyList() throws DaoException {
+		assertThat(this.rencontreDao.getAllByIdPoule(500L)).isEmpty();
+	}
 }

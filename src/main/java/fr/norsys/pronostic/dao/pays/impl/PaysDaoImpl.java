@@ -63,6 +63,6 @@ public class PaysDaoImpl extends JdbcConfig implements PaysDao {
 
 	@Override
 	public List<Pays> getPaysByPoule(Long id) throws DaoException {
-		return this.jdbcTemplate.query(SELECT_QUERY,new Object[]{id},new PaysMapper());
+		return this.jdbcTemplate.query(SELECT_PAYS_FROM_POULE ,new Object[]{id},new PaysMapper());
 	}
 }

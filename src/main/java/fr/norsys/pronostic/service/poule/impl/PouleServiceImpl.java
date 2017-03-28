@@ -39,11 +39,6 @@ public class PouleServiceImpl implements PouleService {
 
 	@Override
 	public List<Poule> getAllPouleByIdCompetiton(Long id) throws DataServiceException {
-		try {
 			return this.pouleDao.getAllPoulesByCompetitionId(id);
-		} catch (DaoException e) {
-			// TODO: insert message
-			throw new DataServiceException("", e);
-		}
 	}
 }

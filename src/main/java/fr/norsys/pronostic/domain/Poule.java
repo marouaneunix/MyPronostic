@@ -1,5 +1,7 @@
 package fr.norsys.pronostic.domain;
 
+import java.util.Optional;
+
 public class Poule {
 
 	private Long id;
@@ -22,6 +24,8 @@ public class Poule {
 		this.isGroupe = isGroupe;
 		this.competition = competition;
 	}
+
+
 
 	public Long getId() {
 		return this.id;

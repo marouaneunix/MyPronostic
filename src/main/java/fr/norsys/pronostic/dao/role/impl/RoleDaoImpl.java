@@ -8,9 +8,12 @@ import java.util.Optional;
 
 import javax.sql.DataSource;
 
+import fr.norsys.pronostic.dao.JdbcConfig;
+import fr.norsys.pronostic.mappers.role.RoleMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Repository;
 
 import fr.norsys.pronostic.dao.role.RoleDao;
@@ -19,14 +22,13 @@ import fr.norsys.pronostic.exception.DaoException;
 import fr.norsys.pronostic.utils.DaoUtils;
 
 @Repository
-public class RoleDaoImpl implements RoleDao {
+public class RoleDaoImpl extends JdbcConfig implements RoleDao {
 
 	private static final Logger LOGGER = LoggerFactory.getLogger(RoleDaoImpl.class);
 
 	private static final String SELECT_QUERY = "SELECT ID_ROLE,NOM FROM ROLE WHERE ID_ROLE = ?";
 
-	@Autowired
-	DataSource dataSource;
+
 
 	@Override
 	public int create(Role model) throws DaoException {
@@ -40,28 +42,13 @@ public class RoleDaoImpl implements RoleDao {
 
 	@Override
 	public Optional<Role> getById(Long id) throws DaoException {
-		PreparedStatement preparedStatement;
-		ResultSet rs;
-		Connection connection = null;
+
 		Role role;
 		try {
-			connection = this.dataSource.getConnection();
-			preparedStatement = DaoUtils.initialisationRequetePreparee(connection, SELECT_QUERY, false, id);
-			rs = preparedStatement.executeQuery();
-			rs.next();
+			role = this.jdbcTemplate.queryForObject(SELECT_QUERY,new Object[]{id},new RoleMapper());
 
-			role = new Role(rs.getLong("ID_ROLE"), rs.getString("NOM"));
-
-		} catch (SQLException e) {
-			throw new DaoException("getByIDPoule Not working SQLException", e);
-		} finally {
-			try {
-				if (connection != null) {
-					connection.close();
-				}
-			} catch (SQLException e) {
-				LOGGER.error("ERROR : {}", e.getMessage());
-			}
+		} catch (EmptyResultDataAccessException e) {
+			throw new DaoException("getByIDRole Not working SQLException", e);
 		}
 		return Optional.ofNullable(role);
 	}
