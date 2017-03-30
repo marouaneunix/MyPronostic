@@ -1,14 +1,32 @@
 package fr.norsys.pronostic.domain;
 
-import java.util.Optional;
 
-public class Poule {
+import javax.persistence.*;
+import java.io.Serializable;
+import java.util.List;
 
+@Entity
+@Table(name = "POULE")
+public class Poule implements Serializable {
+
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	@Column(name="ID_POULE",nullable = false,unique = true)
 	private Long id;
+	@Column(name = "NOM")
 	private String nom;
+	@Column(name = "GROUPE")
 	private boolean isGroupe;
+	@ManyToOne
+	@JoinColumn(name = "ID_COMPETITION",nullable = false)
 	private Competition competition;
-
+	@ManyToMany
+	@JoinTable(
+			name="POULE_PAYS",
+			joinColumns = @JoinColumn(name = "ID_POULE",referencedColumnName = "ID_POULE"),
+			inverseJoinColumns = @JoinColumn(name="ID_PAYS",referencedColumnName = "ID_PAYS")
+	)
+	private List<Pays> payss;
 	public Poule() {
 	}
 

@@ -10,7 +10,8 @@ import org.springframework.test.context.junit4.AbstractTransactionalJUnit4Spring
  *
  */
 
-@ContextConfiguration(locations = { "classpath:/dao-test.xml", "classpath:/datasource-test.xml" })
+@ContextConfiguration(locations = { "classpath:/dao-test.xml",
+		"classpath:/datasource-test.xml" ,})
 public class ADaoTest extends AbstractTransactionalJUnit4SpringContextTests {
 	@Test
 	public void test() {

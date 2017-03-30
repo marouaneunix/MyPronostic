@@ -26,20 +26,16 @@ public class CompetitionServiceImpl implements CompetitionService {
 
 	@Override
 	public List<Competition> getAllCompetitions() throws DataServiceException {
-		try {
+
 			return this.competitionDao.getAll();
-		} catch (DaoException e) {
-			throw new DataServiceException("get All competition service error ", e);
-		}
+
 	}
 
 	@Override
 	public Optional<Competition> getCompetitionById(Long id) throws DataServiceException {
-		try {
+
 			return this.competitionDao.getById(id);
-		} catch (DaoException e) {
-			throw new DataServiceException("get competition by id error", e);
-		}
+
 	}
 
 }

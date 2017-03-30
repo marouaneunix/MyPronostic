@@ -18,9 +18,9 @@ public class GetCompetitonByIdTest extends ACompetitonDaoTest {
 		assertThat(competition.get().getId()).isEqualTo(1L);
 	}
 
-	@Test(expected = DaoException.class)
+	@Test
 	public void shouldThrowDaoExceptionWhenGetById() throws DaoException {
-		this.competitionDao.getById(500L);
+		assertThat(this.competitionDao.getById(500L).isPresent()).isFalse();
 	}
 
 }

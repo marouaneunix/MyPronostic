@@ -22,7 +22,7 @@ public class PronosticMapper implements RowMapper<Pronostic> {
                 resultSet.getString("NOM_SALARIE"),
                 resultSet.getString("PRENOM_SALARIE"),
                 resultSet.getString("USERNAME_SALARIE"),
-                null,role,null);
+                null,role);
         Pays pays1 = new Pays(resultSet.getLong("PAYS1_ID"),
                 resultSet.getString("PAY1_NOM"),
                 resultSet.getString("PAY1_LOGO"));

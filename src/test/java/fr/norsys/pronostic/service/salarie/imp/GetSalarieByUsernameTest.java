@@ -25,7 +25,7 @@ public class GetSalarieByUsernameTest extends ASalarieServiceTest {
 
 		doReturn(Optional.ofNullable(s)).when(this.mockSalarieDao).getSalarieByUsername("saoud");
 
-		Salarie salarie = this.salarieService.getSalariebyUsername("saoud").get();
+		Salarie salarie = this.salarieService.getSalariebyUsername("saoud");
 
 		assertNotNull(salarie);
 		assertEquals("saoud", salarie.getUsername());

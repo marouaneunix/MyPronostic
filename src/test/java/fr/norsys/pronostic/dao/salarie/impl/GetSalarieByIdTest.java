@@ -13,12 +13,12 @@ public class GetSalarieByIdTest extends ASalarieTest {
 
 	@Test
 	public void shoudlReturnSalarieWhenGetById() throws DaoException {
-		Optional<Salarie> salarie = this.salarieDao.getById(1L);
-		assertThat(salarie.isPresent()).isTrue();
+		Salarie salarie = this.salarieDao.getById(1L).get();
+		assertThat(salarie.getId()).isEqualTo(1L);
 	}
 
-	@Test(expected = DaoException.class)
-	public void shoudlThrowTechniqueException() throws DaoException {
-		this.salarieDao.getById(5000L);
+	@Test
+	public void shoudlBeNotPresent() throws DaoException {
+		assertThat(this.salarieDao.getById(5000L).isPresent()).isFalse();
 	}
 }

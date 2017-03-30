@@ -1,11 +1,20 @@
 package fr.norsys.pronostic.domain;
 
+import javax.persistence.*;
+import java.io.Serializable;
 import java.time.LocalDate;
+@Entity
+@Table(name = "COMPETITION")
+public class Competition implements Serializable {
 
-public class Competition {
-
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	@Column(name="ID_COMPETITION",nullable = false, unique = true)
 	private Long id;
+
+	@Column(name="NOM")
 	private String nom;
+	@Column(name="ANNEE")
 	private LocalDate annee;
 
 	public Competition(Long id, String nom, LocalDate annee) {

@@ -1,12 +1,26 @@
 package fr.norsys.pronostic.domain;
 
-public class Pronostic {
+import javax.persistence.*;
+import java.io.Serializable;
 
+@Entity
+@Table(name = "PRONOSTIC")
+public class Pronostic implements Serializable {
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	@Column(name="ID_PRONOSTIC",nullable = false, unique = true)
 	private Long id;
+	@Column(name="BUT_1")
 	private int but1;
+	@Column(name="BUT_2")
 	private int but2;
+	@Column(name="NOTE")
 	private int note;
+	@ManyToOne
+	@JoinColumn(name = "ID_RENCONTRE",nullable = false)
 	private Rencontre rencontre;
+	@ManyToOne
+	@JoinColumn(name = "ID_SALARIE",nullable = false)
 	private Salarie salarie;
 
 	public Pronostic() {

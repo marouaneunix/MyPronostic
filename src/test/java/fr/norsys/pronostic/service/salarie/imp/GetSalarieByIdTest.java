@@ -21,7 +21,7 @@ public class GetSalarieByIdTest extends ASalarieServiceTest {
 
 		doReturn(Optional.ofNullable(new Salarie(3L))).when(this.mockSalarieDao).getById(3L);
 
-		Salarie salarie = this.salarieService.getSalariebyId(3L).get();
+		Salarie salarie = this.salarieService.getSalariebyId(3L);
 
 		assertThat(salarie.getId()).isEqualTo(3L);
 		verify(this.mockSalarieDao, times(1)).getById(3L);

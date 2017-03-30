@@ -17,9 +17,9 @@ public class GetPaysByIdTest extends APaysDaoTest {
 		assertThat(togo.get().getId()).isEqualTo(2L);
 	}
 
-	@Test(expected = DaoException.class)
+	@Test
 	public void shouldThrowTechnocalException() throws DaoException {
 		Optional<Pays> togo = this.paysDao.getById(5000L);
-		assertThat(togo.get().getId()).isEqualTo(2L);
+		assertThat(togo.isPresent()).isFalse();
 	}
 }

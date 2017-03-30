@@ -1,14 +1,16 @@
 package fr.norsys.pronostic.service.salarie;
 
-import java.util.Optional;
 
 import fr.norsys.pronostic.domain.Salarie;
-import fr.norsys.pronostic.exception.DataServiceException;
+import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Optional;
+
+@Transactional
 public interface SalarieService {
 
-	Optional<Salarie> getSalariebyId(Long id) throws DataServiceException;
+	Salarie getSalariebyId(Long id) ;
 
-	Optional<Salarie> getSalariebyUsername(String name) throws DataServiceException;
+	Salarie getSalariebyUsername(String name);
 
 }

@@ -1,14 +1,25 @@
 package fr.norsys.pronostic.domain;
 
+import javax.persistence.*;
+import java.io.Serializable;
+import java.util.List;
+
 /**
  * Pays Model
  */
+@Entity
+@Table(name = "PAYS")
+public class Pays implements Serializable {
 
-public class Pays {
-
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	@Column(name="ID_PAYS",nullable = false,unique = true)
 	private Long id;
+	@Column(name="NOM")
 	private String nom;
+	@Column(name="LOGO")
 	private String logo;
+
 
 	public Pays() {
 	}

@@ -18,8 +18,9 @@ public class GetRoleByIdTest extends ARoleDaoTest {
 		assertThat(role.get().getNom()).isEqualTo("ROLE_ADMIN");
 	}
 
-	@Test(expected = DaoException.class)
-	public void shouldThrowDaoException() throws DaoException {
-		this.roleDao.getById(500L);
+	@Test
+	public void shouldThrowDaoException()  {
+		Optional<Role> role = this.roleDao.getById(500L);
+		assertThat(role.isPresent()).isFalse();
 	}
 }

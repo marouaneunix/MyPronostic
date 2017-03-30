@@ -1,15 +1,31 @@
 package fr.norsys.pronostic.domain;
 
+import javax.persistence.*;
+import java.io.Serializable;
 import java.time.LocalDateTime;
+@Entity
+@Table(name = "RENCONTRE")
+public class Rencontre implements Serializable {
 
-public class Rencontre {
 
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	@Column(name="ID_RENCONTRE",nullable = false, unique = true)
 	private Long id;
+	@ManyToOne
+	@JoinColumn(name = "ID_PAYS_1",nullable = false)
 	private Pays pays1;
+	@ManyToOne
+	@JoinColumn(name = "ID_PAYS_2",nullable = false)
 	private Pays pays2;
+	@Column(name="BUT_1")
 	private int but1;
+	@Column(name="BUT_2")
 	private int but2;
+	@ManyToOne
+	@JoinColumn(name = "ID_POULE",nullable = false)
 	private Poule poule;
+	@Column(name="DATE")
 	private LocalDateTime dateRencontre;
 
 	public Rencontre() {

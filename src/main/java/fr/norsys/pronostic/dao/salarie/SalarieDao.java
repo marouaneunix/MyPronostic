@@ -9,8 +9,9 @@ import fr.norsys.pronostic.domain.Salarie;
 import fr.norsys.pronostic.exception.DaoException;
 
 @Repository
-public interface SalarieDao extends IDAO<Salarie> {
+public interface SalarieDao  {
 
-	Optional<Salarie> getSalarieByUsername(String username) throws DaoException;
+	Optional<Salarie> getSalarieByUsername(String username);
+	Optional<Salarie> getById(Long id);
 
 }

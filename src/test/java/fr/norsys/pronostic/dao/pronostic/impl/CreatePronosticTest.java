@@ -27,7 +27,7 @@ public class CreatePronosticTest extends APronosticTest {
 		Pays pays2 = new Pays(2L, "togo", "mmmm");
 		Rencontre rencontre = new Rencontre(1L, pays1, pays2, 1, 2, poule, LocalDateTime.now());
 		Role role = new Role(1L, "ROLE_USER");
-		Salarie salarie = new Salarie(1L, "badouch", "mohamed", "badouch", "password", role, null);
+		Salarie salarie = new Salarie(1L, "badouch", "mohamed", "badouch", "password", role);
 		int rs = this.pronosticDao.create(new Pronostic(1L, 2, 1, 0, rencontre, salarie));
 		assertThat(rs).isEqualTo(1);
 	}

@@ -19,6 +19,6 @@ public class SalarieMapper implements RowMapper<Salarie> {
                     resultSet.getString("NOM"),
                     resultSet.getString("PRENOM"),
                 resultSet.getString("USERNAME"),
-                resultSet.getString("PASSWORD"),role,null);
+                resultSet.getString("PASSWORD"),role);
     }
 }

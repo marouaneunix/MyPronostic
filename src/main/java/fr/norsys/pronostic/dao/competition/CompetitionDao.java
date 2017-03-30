@@ -10,9 +10,10 @@ import fr.norsys.pronostic.domain.Competition;
 import fr.norsys.pronostic.exception.DaoException;
 
 @Repository
-public interface CompetitionDao extends IDAO<Competition> {
+public interface CompetitionDao{
 
-	List<Competition> getAll() throws DaoException;
+	List<Competition> getAll();
+	Optional<Competition> getById(Long id);
 
 
 }

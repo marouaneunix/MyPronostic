@@ -19,7 +19,7 @@ public class LoadUserByUsernameTest extends ASalarieServiceTest {
 
 	@Test
 	public void shouldReturnUserDetails() throws DaoException {
-		Salarie salarie = new Salarie(1L, "elmerrouni", "maroaune", "mar1", "password", null, null);
+		Salarie salarie = new Salarie(1L, "elmerrouni", "maroaune", "mar1", "password", null);
 		doReturn(Optional.ofNullable(salarie)).when(this.mockSalarieDao).getSalarieByUsername("mar1");
 
 		CustomUserDetails customUserDetails = new CustomUserDetails(salarie);

@@ -29,21 +29,15 @@ public class PaysServiceImpl implements PaysService {
 
 	@Override
 	public Optional<Pays> getPaysbyId(Long id) throws DataServiceException {
-		try {
+
 			return this.paysDao.getById(id);
-		} catch (DaoException e) {
-			// TODO: insert message
-			throw new DataServiceException("", e);
-		}
+
 	}
 
 	@Override
 	public List<Pays> getPaysByIdPoule(Long id) throws DataServiceException {
-		try {
+
 			return this.paysDao.getPaysByPoule(id);
-		} catch (DaoException e) {
-			// TODO: insert message
-			throw new DataServiceException("", e);
-		}
+
 	}
 }
