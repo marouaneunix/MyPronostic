@@ -54,4 +54,5 @@ public class Pays implements Serializable {
 	public void setLogo(String logo) {
 		this.logo = logo;
 	}
+
 }

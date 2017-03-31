@@ -3,6 +3,8 @@ package fr.norsys.pronostic.domain;
 import javax.persistence.*;
 import java.io.Serializable;
 
+import static javax.persistence.CascadeType.REFRESH;
+
 @Entity
 @Table(name = "PRONOSTIC")
 public class Pronostic implements Serializable {
@@ -16,10 +18,10 @@ public class Pronostic implements Serializable {
 	private int but2;
 	@Column(name="NOTE")
 	private int note;
-	@ManyToOne
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "ID_RENCONTRE",nullable = false)
 	private Rencontre rencontre;
-	@ManyToOne
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "ID_SALARIE",nullable = false)
 	private Salarie salarie;
 
@@ -90,4 +92,6 @@ public class Pronostic implements Serializable {
 	public void setSalarie(Salarie salarie) {
 		this.salarie = salarie;
 	}
+
+
 }

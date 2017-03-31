@@ -4,6 +4,8 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.List;
+import java.util.Optional;
 
 import org.junit.Test;
 
@@ -15,26 +17,30 @@ import fr.norsys.pronostic.domain.Rencontre;
 import fr.norsys.pronostic.domain.Role;
 import fr.norsys.pronostic.domain.Salarie;
 import fr.norsys.pronostic.exception.DaoException;
+import org.springframework.dao.InvalidDataAccessApiUsageException;
 
 public class CreatePronosticTest extends APronosticTest {
+
 
 	@Test
 	public void shouldReturn1WhenInsertSucces() throws DaoException {
 
-		Competition competition = new Competition(1L, "CAN ", LocalDate.now());
-		Poule poule = new Poule(1L, "A", true, competition);
-		Pays pays1 = new Pays(1L, "maroc", "hhhh");
-		Pays pays2 = new Pays(2L, "togo", "mmmm");
-		Rencontre rencontre = new Rencontre(1L, pays1, pays2, 1, 2, poule, LocalDateTime.now());
-		Role role = new Role(1L, "ROLE_USER");
-		Salarie salarie = new Salarie(1L, "badouch", "mohamed", "badouch", "password", role);
-		int rs = this.pronosticDao.create(new Pronostic(1L, 2, 1, 0, rencontre, salarie));
-		assertThat(rs).isEqualTo(1);
+		Rencontre rencontre = rencontreDao.getById(1L).get();
+
+		Salarie salarie = salarieDao.getById(1L).get();
+		Pronostic pronostic = new Pronostic();
+		pronostic.setBut1(20);
+		pronostic.setBut2(20);
+		pronostic.setNote(0);
+		pronostic.setSalarie(salarie);
+		pronostic.setRencontre(rencontre);
+		pronosticDao.createPronostic(pronostic);
+		assertThat(rencontreDao.getById(1L).get().getPronostics().stream().anyMatch(p -> p.getBut1() == 20 && p.getBut2() == 20)).isTrue();
 	}
 
-	@Test(expected = DaoException.class)
+	@Test(expected = InvalidDataAccessApiUsageException.class)
 	public void shouldThrowDaoExceptionWhenPronosticEqtNull() throws DaoException {
-		this.pronosticDao.create(null);
+		this.pronosticDao.createPronostic(null);
 
 	}
 }

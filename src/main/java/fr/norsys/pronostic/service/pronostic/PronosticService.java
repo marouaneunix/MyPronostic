@@ -12,7 +12,7 @@ import fr.norsys.pronostic.exception.DataServiceException;
 @Service
 public interface PronosticService {
 
-	int create(Pronostic pronostic) throws DataServiceException;
+	void create(Pronostic pronostic) throws DataServiceException;
 
 	List<Pronostic> getAllBySalarieId(Long id) throws DataServiceException;
 

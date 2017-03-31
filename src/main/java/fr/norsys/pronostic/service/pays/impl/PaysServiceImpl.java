@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -29,9 +30,7 @@ public class PaysServiceImpl implements PaysService {
 
 	@Override
 	public Optional<Pays> getPaysbyId(Long id) throws DataServiceException {
-
 			return this.paysDao.getById(id);
-
 	}
 
 	@Override

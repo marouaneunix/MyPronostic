@@ -1,4 +1,4 @@
-package fr.norsys.pronostic.web.controller;
+package fr.norsys.pronostic.web.controller.connexion;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;

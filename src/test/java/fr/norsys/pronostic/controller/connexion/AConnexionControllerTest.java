@@ -6,7 +6,7 @@ import org.mockito.MockitoAnnotations;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
-import fr.norsys.pronostic.web.controller.ConnexionController;
+import fr.norsys.pronostic.web.controller.connexion.ConnexionController;
 
 public abstract class AConnexionControllerTest {
 

@@ -9,8 +9,8 @@ import java.util.Optional;
 @Transactional
 public interface SalarieService {
 
-	Salarie getSalariebyId(Long id) ;
+	Optional<Salarie> getSalariebyId(Long id) ;
 
-	Salarie getSalariebyUsername(String name);
+	Optional<Salarie> getSalariebyUsername(String name);
 
 }

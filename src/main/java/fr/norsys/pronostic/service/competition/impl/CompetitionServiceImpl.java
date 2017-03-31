@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -26,16 +27,12 @@ public class CompetitionServiceImpl implements CompetitionService {
 
 	@Override
 	public List<Competition> getAllCompetitions() throws DataServiceException {
-
-			return this.competitionDao.getAll();
-
+		return this.competitionDao.getAll();
 	}
 
 	@Override
 	public Optional<Competition> getCompetitionById(Long id) throws DataServiceException {
-
 			return this.competitionDao.getById(id);
-
 	}
 
 }

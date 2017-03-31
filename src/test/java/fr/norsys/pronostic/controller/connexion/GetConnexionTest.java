@@ -5,7 +5,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import org.junit.Before;
 import org.junit.Test;
 
-import fr.norsys.pronostic.web.controller.ConnexionController;
+import fr.norsys.pronostic.web.controller.connexion.ConnexionController;
 
 public class GetConnexionTest {
 

@@ -27,13 +27,13 @@ public class GetPouleByIdTest extends APouleServiceTest {
 
 	}
 
-	@Test(expected = DataServiceException.class)
+	@Test
 	public void shoudThrowDataServiceException() throws DaoException, DataServiceException {
 
-		doThrow(DataServiceException.class).when(this.mockPouleDAO).getById(500L);
+		doReturn(Optional.ofNullable(null)).when(this.mockPouleDAO).getById(500L);
 
-		this.pouleService.getPoulebyId(500L);
-		verify(this.mockPouleDAO, times(1)).getById(1L);
+		assertThat(this.pouleService.getPoulebyId(500L).isPresent()).isFalse();
+		verify(this.mockPouleDAO, times(1)).getById(500L);
 
 	}
 

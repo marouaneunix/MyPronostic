@@ -29,10 +29,8 @@ import fr.norsys.pronostic.utils.DaoUtils;
 @Repository
 public class PaysDaoImpl extends AbstractJpaDAO<Pays> implements PaysDao {
 
-	private static final Logger LOGGER = LoggerFactory.getLogger(PaysDaoImpl.class);
 
-	private static final String SELECT_QUERY = " SELECT ID_PAYS,NOM,LOGO FROM PAYS WHERE ID_PAYS = ?";
-	private static final String SELECT_PAYS_FROM_POULE = " SELECT  pa.* from PAYS pa 	 INNER JOIN POULE_PAYS pp on pp.ID_PAYS = pa.ID_PAYS  INNER JOIN POULE po on po.ID_POULE = pp.ID_POULE  WHERE po.ID_POULE = :IDPOULE ";
+
 
 	public PaysDaoImpl() {
 		setClazz(Pays.class);

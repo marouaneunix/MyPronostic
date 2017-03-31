@@ -19,8 +19,8 @@ public class GetPouleByIdTest extends APouleTest {
 		assertThat(poule.get().getCompetition().getId()).isEqualTo(1L);
 	}
 
-	@Test(expected = DaoException.class)
+	@Test
 	public void shouldThrowDaoException() throws DaoException {
-		this.pouleDao.getById(500L);
+		assertThat(this.pouleDao.getById(500L).isPresent()).isFalse();
 	}
 }

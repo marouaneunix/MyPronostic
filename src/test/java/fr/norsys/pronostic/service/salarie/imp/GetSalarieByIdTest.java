@@ -21,20 +21,20 @@ public class GetSalarieByIdTest extends ASalarieServiceTest {
 
 		doReturn(Optional.ofNullable(new Salarie(3L))).when(this.mockSalarieDao).getById(3L);
 
-		Salarie salarie = this.salarieService.getSalariebyId(3L);
+		Salarie salarie = this.salarieService.getSalariebyId(3L).get();
 
 		assertThat(salarie.getId()).isEqualTo(3L);
 		verify(this.mockSalarieDao, times(1)).getById(3L);
 	}
 
-	@Test(expected = DataServiceException.class)
+	@Test
 	public void shoudThrowDataServiceException() throws DaoException, DataServiceException {
 
-		doThrow(DaoException.class).when(this.mockSalarieDao).getById(500L);
+		doReturn(Optional.ofNullable(null)).when(this.mockSalarieDao).getById(500L);
+		assertThat(this.salarieService.getSalariebyId(500L).isPresent()).isFalse();
 
-		this.salarieService.getSalariebyId(500L);
 
-		verify(this.mockSalarieDao, times(1)).getById(3L);
+		verify(this.mockSalarieDao, times(1)).getById(500L);
 	}
 
 }

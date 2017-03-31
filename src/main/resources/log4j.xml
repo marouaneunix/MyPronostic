@@ -42,6 +42,14 @@
     <logger name="org.springframework.web">
         <level value="info" />
     </logger>
+    <logger name="org.hibernate.type">
+        <level value="trace"/>
+    </logger>
+    <logger name="org.hibernate.sql">
+        <level value="debug"/>
+    </logger>
+
+
 
 
     <!-- Root Logger -->

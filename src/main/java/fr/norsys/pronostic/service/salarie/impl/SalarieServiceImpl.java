@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Optional;
+import java.util.OptionalDouble;
 
 @Transactional
 public class SalarieServiceImpl implements SalarieService {
@@ -20,12 +21,12 @@ public class SalarieServiceImpl implements SalarieService {
 	}
 
 	@Override
-	public Salarie getSalariebyId(Long id)   {
-			return this.salarieDao.getById(id).get();
+	public  Optional<Salarie> getSalariebyId(Long id)   {
+			return this.salarieDao.getById(id);
 	}
 
 	@Override
-	public Salarie  getSalariebyUsername(String name)   {
-			return this.salarieDao.getSalarieByUsername(name).get();
+	public Optional<Salarie> getSalariebyUsername(String name)   {
+			return this.salarieDao.getSalarieByUsername(name);
 	}
 }

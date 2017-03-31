@@ -15,6 +15,7 @@ public class Competition implements Serializable {
 	@Column(name="NOM")
 	private String nom;
 	@Column(name="ANNEE")
+
 	private LocalDate annee;
 
 	public Competition(Long id, String nom, LocalDate annee) {

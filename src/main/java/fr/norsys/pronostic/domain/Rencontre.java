@@ -3,6 +3,9 @@ package fr.norsys.pronostic.domain;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.time.LocalDateTime;
+import java.util.Collection;
+import java.util.List;
+
 @Entity
 @Table(name = "RENCONTRE")
 public class Rencontre implements Serializable {
@@ -19,14 +22,20 @@ public class Rencontre implements Serializable {
 	@JoinColumn(name = "ID_PAYS_2",nullable = false)
 	private Pays pays2;
 	@Column(name="BUT_1")
-	private int but1;
+	private Integer but1;
 	@Column(name="BUT_2")
-	private int but2;
+	private Integer but2;
 	@ManyToOne
 	@JoinColumn(name = "ID_POULE",nullable = false)
 	private Poule poule;
 	@Column(name="DATE")
 	private LocalDateTime dateRencontre;
+
+	@OneToMany(mappedBy = "rencontre")
+	private Collection<Pronostic> pronostics;
+
+
+
 
 	public Rencontre() {
 	}
@@ -35,7 +44,7 @@ public class Rencontre implements Serializable {
 		this.id = id;
 	}
 
-	public Rencontre(Long id, Pays pays1, Pays pays2, int but1, int but2, Poule poule, LocalDateTime dateRencontre) {
+	public Rencontre(Long id, Pays pays1, Pays pays2, Integer but1, Integer but2, Poule poule, LocalDateTime dateRencontre) {
 		this.id = id;
 		this.pays1 = pays1;
 		this.pays2 = pays2;
@@ -43,9 +52,10 @@ public class Rencontre implements Serializable {
 		this.but2 = but2;
 		this.poule = poule;
 		this.dateRencontre = dateRencontre;
+
 	}
 
-	public Rencontre(Pays pays1, Pays pays2, int but1, int but2, Poule poule, LocalDateTime dateRencontre) {
+	public Rencontre(Pays pays1, Pays pays2, Integer but1, Integer but2, Poule poule, LocalDateTime dateRencontre) {
 		this.pays1 = pays1;
 		this.pays2 = pays2;
 		this.but1 = but1;
@@ -54,6 +64,13 @@ public class Rencontre implements Serializable {
 		this.dateRencontre = dateRencontre;
 	}
 
+	public Collection<Pronostic> getPronostics() {
+		return pronostics;
+	}
+
+	public void setPronostics(Collection<Pronostic> pronostics) {
+		this.pronostics = pronostics;
+	}
 	public Long getId() {
 		return this.id;
 	}
@@ -74,19 +91,19 @@ public class Rencontre implements Serializable {
 		this.pays2 = pays2;
 	}
 
-	public int getBut1() {
+	public Integer getBut1() {
 		return this.but1;
 	}
 
-	public void setBut1(int but1) {
+	public void setBut1(Integer but1) {
 		this.but1 = but1;
 	}
 
-	public int getBut2() {
+	public Integer getBut2() {
 		return this.but2;
 	}
 
-	public void setBut2(int but2) {
+	public void setBut2(Integer but2) {
 		this.but2 = but2;
 	}
 
@@ -105,4 +122,5 @@ public class Rencontre implements Serializable {
 	public void setDateRencontre(LocalDateTime dateRencontre) {
 		this.dateRencontre = dateRencontre;
 	}
+
 }

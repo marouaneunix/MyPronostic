@@ -1,15 +1,15 @@
 package fr.norsys.pronostic.dao.poule;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.stereotype.Repository;
 
-import fr.norsys.pronostic.dao.IDAO;
 import fr.norsys.pronostic.domain.Poule;
-import fr.norsys.pronostic.exception.DaoException;
 
 @Repository
-public interface PouleDao extends IDAO<Poule> {
+public interface PouleDao  {
 
-	List<Poule> getAllPoulesByCompetitionId(Long id);
+	List getAllPoulesByCompetitionId(Long id);
+	Optional<Poule> getById(Long id);
 }

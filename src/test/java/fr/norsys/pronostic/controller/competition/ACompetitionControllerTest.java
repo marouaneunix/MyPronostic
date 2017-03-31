@@ -10,7 +10,7 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import fr.norsys.pronostic.service.competition.CompetitionService;
 import fr.norsys.pronostic.service.pays.PaysService;
 import fr.norsys.pronostic.service.poule.PouleService;
-import fr.norsys.pronostic.web.controller.CompetitionController;
+import fr.norsys.pronostic.web.controller.competition.CompetitionController;
 
 public abstract class ACompetitionControllerTest {
 

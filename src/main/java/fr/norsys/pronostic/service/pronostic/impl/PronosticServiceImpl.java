@@ -3,6 +3,7 @@ package fr.norsys.pronostic.service.pronostic.impl;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.InvalidDataAccessApiUsageException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -27,13 +28,12 @@ public class PronosticServiceImpl implements PronosticService {
 	}
 
 	@Override
-	public int create(Pronostic pronostic) throws DataServiceException {
-		try {
-			return this.pronosticDao.create(pronostic);
-		} catch (DaoException e) {
-			// TODO: insert message
-			throw new DataServiceException("", e);
-		}
+	public void create(Pronostic pronostic) throws DataServiceException {
+			try {
+				this.pronosticDao.createPronostic(pronostic);
+			}catch (InvalidDataAccessApiUsageException e){
+				throw new DataServiceException("pronostic not should be null");
+			}
 	}
 
 	@Override

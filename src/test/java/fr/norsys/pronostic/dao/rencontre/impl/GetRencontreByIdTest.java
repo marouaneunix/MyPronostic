@@ -14,8 +14,8 @@ public class GetRencontreByIdTest extends ARencontreTest {
 		assertThat(rencontre).isNotNull();
 	}
 
-	@Test(expected = DaoException.class)
+	@Test
 	public void shouldThrowTechniqueException() throws DaoException {
-		this.rencontreDao.getById(500L);
+		assertThat(this.rencontreDao.getById(500L).isPresent()).isFalse();
 	}
 }

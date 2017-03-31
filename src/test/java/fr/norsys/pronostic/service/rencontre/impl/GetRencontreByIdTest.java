@@ -16,15 +16,11 @@ import fr.norsys.pronostic.exception.DataServiceException;
 
 public class GetRencontreByIdTest extends ARencontreServiceTest {
 
-	@Test(expected = DataServiceException.class)
+	@Test
 	public void shoudlThrowTechniqueException() throws DaoException, DataServiceException {
-
-		doThrow(DataServiceException.class).when(this.mockRencontreDAO).getById(555L);
-
-		this.rencontreService.getRencontrebyId(555L).get();
-
+		doReturn(Optional.ofNullable(null)).when(this.mockRencontreDAO).getById(555L);
+		assertThat(this.rencontreService.getRencontrebyId(555L).isPresent()).isFalse();
 		verify(this.mockRencontreDAO, times(1)).getById(555L);
-
 	}
 
 	@Test

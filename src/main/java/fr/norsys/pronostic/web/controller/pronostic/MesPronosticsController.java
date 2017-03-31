@@ -1,4 +1,4 @@
-package fr.norsys.pronostic.web.controller;
+package fr.norsys.pronostic.web.controller.pronostic;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -39,9 +39,6 @@ public class MesPronosticsController {
 			poules.add(pronostic.getRencontre().getPoule());
 		}
 
-		pronostics.stream().forEach(p -> {
-			System.out.println(p.getRencontre().getPays1().getNom()+" : "+p.getBut1()+" VS "+p.getBut2()+" : "+p.getRencontre().getPays2().getNom());
-		});
 		model.addAttribute("pronostics", pronostics);
 		model.addAttribute("competitions", competitions);
 		model.addAttribute("poules", poules);

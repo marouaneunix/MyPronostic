@@ -12,6 +12,7 @@ import fr.norsys.pronostic.exception.DaoException;
 
 public class GetAllRencontresNonPronostiquerParIdPoule extends ARencontreTest {
 
+
 	@Ignore
 	@Test
 	public void shouldReturnRencontreWhenGetRencontreByIDPouleNonPronostiquer() throws DaoException {

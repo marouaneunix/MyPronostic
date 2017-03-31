@@ -36,11 +36,9 @@ public class RencontreServiceImpl implements RencontreService {
 
 	@Override
 	public Optional<Rencontre> getRencontrebyId(Long id) throws DataServiceException {
-		try {
+
 			return this.rencontreDao.getById(id);
-		} catch (DaoException e) {
-			throw new DataServiceException("Error get rencontre by id Service", e);
-		}
+
 	}
 
 	@Override

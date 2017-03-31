@@ -1,5 +1,6 @@
 package fr.norsys.pronostic.service.competition.impl;
 
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.doThrow;
 import static org.mockito.Mockito.times;
@@ -13,6 +14,7 @@ import org.junit.Test;
 import fr.norsys.pronostic.domain.Competition;
 import fr.norsys.pronostic.exception.DaoException;
 import fr.norsys.pronostic.exception.DataServiceException;
+import org.springframework.dao.EmptyResultDataAccessException;
 
 /**
  * Created by SAOUD on 3/20/17.
@@ -27,10 +29,10 @@ public class GetCompetitionByIdTest extends ACompetitonServiceTest {
 		verify(this.mockCompetionDAO, times(1)).getById(1L);
 	}
 
-	@Test(expected = DataServiceException.class)
+	@Test
 	public void shoudThrowDataServiceException() throws DaoException, DataServiceException {
-		doThrow(DaoException.class).when(this.mockCompetionDAO).getById(500L);
-		this.competitionService.getCompetitionById(500L);
+		doReturn(Optional.ofNullable(null)).when(this.mockCompetionDAO).getById(500L);
+		assertThat(this.competitionService.getCompetitionById(500L).isPresent()).isFalse() ;
 
 	}
 

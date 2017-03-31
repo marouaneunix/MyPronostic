@@ -9,10 +9,11 @@ import java.util.List;
 import java.util.Optional;
 
 
-
+import fr.norsys.pronostic.dao.AbstractJpaDAO;
 import fr.norsys.pronostic.dao.JdbcConfig;
 import fr.norsys.pronostic.mappers.pronostic.PronosticMapper;
 
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import fr.norsys.pronostic.dao.pronostic.PronosticDao;
@@ -22,7 +23,7 @@ import fr.norsys.pronostic.exception.DaoException;
 
 
 @Repository
-public class PronosticDaoImpl extends JdbcConfig implements PronosticDao {
+public class PronosticDaoImpl extends AbstractJpaDAO implements PronosticDao {
 
 
 
@@ -46,34 +47,26 @@ public class PronosticDaoImpl extends JdbcConfig implements PronosticDao {
 			"LEFT JOIN COMPETITION co on co.ID_COMPETITION = po.ID_COMPETITION " +
 			"WHERE pr.ID_SALARIE = ?";
 
-
-
+	public PronosticDaoImpl() {
+		setClazz(Pronostic.class);
+	}
 
 	@Override
 	public List<Pronostic> getAllPronosticsBySalarieId(Long id){
-		return this.jdbcTemplate.query(SELECT_ALL_BY_SALARIE_QUERY,new Object[]{id},new PronosticMapper());
+		return this.entityManager.createQuery("from Pronostic as p where p.salarie.id = :idSalarie").setParameter("idSalarie",id).getResultList();
 	}
 
-	@Override
-	public int create(Pronostic model) throws DaoException {
-		if (model == null){
-			throw  new DaoException("Pronostic is null");
-		}
-		return this.jdbcTemplate.update(INSERT_QUERY,model.getBut1(),model.getBut2(),model.getNote(),model.getRencontre().getId(),model.getSalarie().getId());
-	}
 
 	@Override
-	public void update(Pronostic model) throws DaoException {
-		throw new UnsupportedOperationException();
+	public void createPronostic(Pronostic model)   {
+		this.update(model);
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
-	public Optional<Pronostic> getById(Long id) throws DaoException {
-		throw new UnsupportedOperationException();
+	public List<Pronostic> getAll() {
+		return this.findAll();
 	}
 
-	@Override
-	public void delete(Pronostic model) throws DaoException {
-		throw new UnsupportedOperationException();
-	}
+
 }

@@ -1,5 +1,6 @@
 package fr.norsys.pronostic.service.salarie.imp;
 
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.mockito.Mockito.doReturn;
@@ -25,7 +26,7 @@ public class GetSalarieByUsernameTest extends ASalarieServiceTest {
 
 		doReturn(Optional.ofNullable(s)).when(this.mockSalarieDao).getSalarieByUsername("saoud");
 
-		Salarie salarie = this.salarieService.getSalariebyUsername("saoud");
+		Salarie salarie = this.salarieService.getSalariebyUsername("saoud").get();
 
 		assertNotNull(salarie);
 		assertEquals("saoud", salarie.getUsername());
@@ -33,14 +34,16 @@ public class GetSalarieByUsernameTest extends ASalarieServiceTest {
 
 	}
 
-	@Test(expected = DataServiceException.class)
+	@Test
 	public void shoudThrowDataServiceException() throws DaoException, DataServiceException {
 
-		doThrow(DaoException.class).when(this.mockSalarieDao).getSalarieByUsername("anonymous");
+		doReturn(Optional.ofNullable(null)).when(this.mockSalarieDao).getSalarieByUsername("anonymous");
+		assertThat(this.salarieService.getSalariebyUsername("anonymous").isPresent()).isFalse();
 
-		this.salarieService.getSalariebyUsername("anonymous");
 
-		verify(this.mockSalarieDao, times(1)).getSalarieByUsername("saoud");
+
+
+		verify(this.mockSalarieDao, times(1)).getSalarieByUsername("anonymous");
 
 	}
 

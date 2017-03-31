@@ -1,4 +1,4 @@
-package fr.norsys.pronostic.web.controller;
+package fr.norsys.pronostic.web.controller.pronostic;
 
 import java.util.ArrayList;
 import java.util.List;
