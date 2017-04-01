@@ -20,8 +20,7 @@ public class PronosticServiceImpl implements PronosticService {
 	@Autowired
 	PronosticDao pronosticDao;
 
-	public PronosticServiceImpl() {
-	}
+
 
 	public PronosticServiceImpl(PronosticDao pronosticDao) {
 		this.pronosticDao = pronosticDao;

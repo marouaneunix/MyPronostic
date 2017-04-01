@@ -20,7 +20,8 @@ import fr.norsys.pronostic.utils.AuthenticationUtil;
 
 @Controller
 public class MesPronosticsController {
-	public static final String ATT_SESSION_USER = "currentUser";
+
+
 	private static final String VUE = "salarie/mes_pronostics";
 	@Autowired
 	private PronosticService pronosticService;

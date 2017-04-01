@@ -21,8 +21,7 @@ public class PaysServiceImpl implements PaysService {
 	@Autowired
 	PaysDao paysDao;
 
-	public PaysServiceImpl() {
-	}
+
 
 	public PaysServiceImpl(PaysDao paysDao) {
 		this.paysDao = paysDao;

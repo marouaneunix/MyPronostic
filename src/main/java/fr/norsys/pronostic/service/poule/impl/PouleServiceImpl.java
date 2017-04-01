@@ -20,8 +20,7 @@ public class PouleServiceImpl implements PouleService {
 	@Autowired
 	private PouleDao pouleDao;
 
-	public PouleServiceImpl() {
-	}
+
 
 	public PouleServiceImpl(PouleDao pouleDao) {
 		this.pouleDao = pouleDao;

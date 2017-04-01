@@ -50,6 +50,7 @@ public class PronosticController {
 
 		Poule poule = this.pouleService.getPoulebyId(idPoule).get();
 
+
 		model.addAttribute("poule", poule);
 		model.addAttribute("rencontres", rencontres);
 

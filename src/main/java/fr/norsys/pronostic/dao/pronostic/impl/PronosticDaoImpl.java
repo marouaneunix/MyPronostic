@@ -1,25 +1,15 @@
 package fr.norsys.pronostic.dao.pronostic.impl;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 
 import fr.norsys.pronostic.dao.AbstractJpaDAO;
-import fr.norsys.pronostic.dao.JdbcConfig;
-import fr.norsys.pronostic.mappers.pronostic.PronosticMapper;
 
-import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import fr.norsys.pronostic.dao.pronostic.PronosticDao;
 
 import fr.norsys.pronostic.domain.Pronostic;
-import fr.norsys.pronostic.exception.DaoException;
 
 
 @Repository
@@ -59,7 +49,7 @@ public class PronosticDaoImpl extends AbstractJpaDAO implements PronosticDao {
 
 	@Override
 	public void createPronostic(Pronostic model)   {
-		this.update(model);
+		this.create(model);
 	}
 
 	@SuppressWarnings("unchecked")
