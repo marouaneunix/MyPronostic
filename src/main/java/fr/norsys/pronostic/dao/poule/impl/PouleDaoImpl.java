@@ -28,6 +28,11 @@ public class PouleDaoImpl extends AbstractJpaDAO<Poule> implements PouleDao {
 		return this.findOne(id);
 	}
 
+	@Override
+	public void createPoule(Poule poule) {
+		this.create(poule);
+	}
+
 
 	@SuppressWarnings("unchecked")
 	@Override

@@ -12,4 +12,5 @@ public interface PouleDao  {
 
 	List getAllPoulesByCompetitionId(Long id);
 	Optional<Poule> getById(Long id);
+	void createPoule(Poule poule);
 }
