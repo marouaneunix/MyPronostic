@@ -2,12 +2,9 @@ package fr.norsys.pronostic.dao.role.impl;
 
 
 import fr.norsys.pronostic.dao.AbstractJpaDAO;
-
-
-import org.springframework.stereotype.Repository;
-
 import fr.norsys.pronostic.dao.role.RoleDao;
 import fr.norsys.pronostic.domain.Role;
+import org.springframework.stereotype.Repository;
 
 import java.util.Optional;
 

@@ -67,6 +67,7 @@ public class PronosticController {
 
 		Rencontre rencontre = this.rencontreService.getRencontrebyId(rencontreId).get();
 		Pronostic pronostic = new Pronostic(1L, but1, but2, 0, rencontre, salarie);
+		System.out.println(pronostic);
 		this.pronosticService.create(pronostic);
 
 		return REDIRECT_URL + req.getSession().getAttribute("idPoule");

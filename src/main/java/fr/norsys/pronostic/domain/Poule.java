@@ -3,6 +3,7 @@ package fr.norsys.pronostic.domain;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -20,13 +21,15 @@ public class Poule implements Serializable {
 	@ManyToOne
 	@JoinColumn(name = "ID_COMPETITION",nullable = false)
 	private Competition competition;
-	@ManyToMany
+	@ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
 	@JoinTable(
 			name="POULE_PAYS",
 			joinColumns = @JoinColumn(name = "ID_POULE",referencedColumnName = "ID_POULE"),
 			inverseJoinColumns = @JoinColumn(name="ID_PAYS",referencedColumnName = "ID_PAYS")
 	)
-	private List<Pays> payss;
+	private List<Pays> payss = new ArrayList<>();
+
+
 	public Poule() {
 	}
 
@@ -43,7 +46,17 @@ public class Poule implements Serializable {
 		this.competition = competition;
 	}
 
+	public void setId(Long id) {
+		this.id = id;
+	}
 
+	public List<Pays> getPayss() {
+		return payss;
+	}
+
+	public void setPayss(List<Pays> payss) {
+		this.payss = payss;
+	}
 
 	public Long getId() {
 		return this.id;

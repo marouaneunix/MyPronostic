@@ -1,17 +1,10 @@
 package fr.norsys.pronostic.dao.salarie.impl;
 
 
-
-
-
 import fr.norsys.pronostic.dao.AbstractJpaDAO;
-
-
-
-import org.springframework.stereotype.Repository;
-
 import fr.norsys.pronostic.dao.salarie.SalarieDao;
 import fr.norsys.pronostic.domain.Salarie;
+import org.springframework.stereotype.Repository;
 
 import java.util.Optional;
 
